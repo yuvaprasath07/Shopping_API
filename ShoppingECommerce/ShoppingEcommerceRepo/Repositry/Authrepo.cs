@@ -76,12 +76,13 @@ namespace ShoppingEcommerceRepo.Repositry
                         {
                             while (reader.Read())
                             {
-
-                                result.Id = (int)(reader["registerid"] is DBNull ? (int?)null : Convert.ToInt32(reader["registerid"]));
+                                result.Id = reader["registerid"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["registerid"]);
+                                result.Name = reader["Name"] == DBNull.Value ? null : reader["Name"].ToString();
                                 result.Email = reader["Email"] is DBNull ? null : reader["Email"].ToString();
+                                result.Mobilenumber = reader["Mobilenumber"] is DBNull ? null : reader["Mobilenumber"].ToString();
                                 result.Role = reader["role"] is DBNull ? null : reader["role"].ToString();
-                                result.password = reader["password"] is DBNull ? null : reader["password"].ToString();
-                                // You might want to set other properties as well, like result.Id
+                                //result.password = reader["password"] is DBNull ? null : reader["password"].ToString();
+                                //result.password = reader.GetString("password");
                             }
                         }
                     }

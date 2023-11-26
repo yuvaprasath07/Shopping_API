@@ -11,6 +11,6 @@ namespace ShoppingEcommerceLogic.InterFace
     public interface IAuthLogic
     {
         Task<ResponseMessage> Register(RegisterShoppingVM RegiterModel);
-        Task<string> Login(LoginModel loginModel);
+        Task<ResponseMessage> Login(LoginModel loginModel);
     }
 }

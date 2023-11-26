@@ -23,8 +23,8 @@ namespace ShoppingECommerce.Controllers
             return Ok(res);
         }
 
-        [HttpPost]
-        public async Task<string> Login(LoginModel loginModel)
+        [HttpPost("login")]
+        public async Task<ResponseMessage> Login(LoginModel loginModel)
         {
             var token = _authLogic.Login(loginModel);
             if(token != null)

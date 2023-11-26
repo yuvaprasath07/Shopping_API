@@ -22,13 +22,23 @@ namespace ShoppingEcommerceLogic.Logic
             _config = config;
         }
 
-        public async Task<string> Login(LoginModel loginModel)
+        public async Task<ResponseMessage> Login(LoginModel loginModel)
         {
             GenerateToken token = new GenerateToken(_config);
             var data = await _authrepo.Login(loginModel);
             if (data.Email != null)
             {
-               return token.generateJWTToken(data);
+               var tokens =  token.generateJWTToken(data);
+                var logdata = new LoginResponce()
+                {
+                    Id = (int)data.Id,
+                    Name = data.Name,
+                    Email = data.Email,
+                    MobileNumber = data.Mobilenumber,
+                    Role = data.Role,
+                    Token = tokens
+                };
+                return ResponseMessage.New(ResponseCode.OK, logdata);
             }
             else
             {

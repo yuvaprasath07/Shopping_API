@@ -16,7 +16,8 @@ namespace ShoppingECommerce.Controllers
         {
             _authLogic = authLogic;
         }
-        [HttpPost("AdminRegister")]
+
+        [HttpPost("Register")]
         public async Task<IActionResult> AdminRegister(RegisterShoppingVM adminRegiterModel)
         {
             var res = await _authLogic.Register(adminRegiterModel);

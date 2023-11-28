@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="InterFace\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ShoppingEcomerceCommon\ShoppingEcomerceCommon.csproj" />
     <ProjectReference Include="..\ShoppingEcommerceRepo\ShoppingEcommerceRepo.csproj" />
   </ItemGroup>

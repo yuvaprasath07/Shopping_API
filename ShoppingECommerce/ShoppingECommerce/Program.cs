@@ -22,6 +22,10 @@ namespace ShoppingECommerce
 
             builder.Services.AddScoped<IAuthLogic, AuthLogic>();
             builder.Services.AddScoped<IAuthrepo, Authrepo>();
+            builder.Services.AddScoped<Iadminproductaddrepo, adminproductaddrepo>();
+            builder.Services.AddScoped<Iadminproductaddlogic, adminproductaddlogic>();
+            builder.Services.AddScoped<Icategroyrepo, categroyrepo>();
+            builder.Services.AddScoped<Icategroylogic, categroylogic>();
 
             builder.Services.AddSwaggerGen(options =>
             {

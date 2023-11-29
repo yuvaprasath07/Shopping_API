@@ -34,20 +34,12 @@ namespace ShoppingECommerce.Controllers
 
                 foreach (var product in getproduct)
                 {
-                    /* string imageFullPath = product.Imagefilepath.Replace("\\","/");
-                     string crtimagepath = imageFullPath.TrimStart("wwwroot");
-                     string hostUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
-                     string imageUrl = $"{hostUrl}/{imageFullPath}";
-                     product.Imagefilepath = imageUrl;*/
-
                     string imageFullPath = product.Imagefilepath.Replace("\\", "/");
                     string crtimagepath = imageFullPath.Substring(imageFullPath.IndexOf("wwwroot") + "wwwroot".Length);
                     string hostUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
                     string imageUrl = $"{hostUrl}/{crtimagepath}";
                     product.Imagefilepath = imageUrl;
-
                 }
-
                 return Ok(getproduct);
             }
             catch (Exception ex)

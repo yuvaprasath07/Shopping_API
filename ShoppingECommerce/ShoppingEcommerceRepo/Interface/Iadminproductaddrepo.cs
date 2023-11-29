@@ -10,6 +10,7 @@ namespace ShoppingEcommerceRepo.Interface
 {
     public interface Iadminproductaddrepo
     {
-        Task<bool> adminproductadd(Addproductadmin AddproductadminModel);
+        Task<bool> adminproductadd(AddproductadminDB AddproductadminModel);
+        public List<AddproductadminDB> productget();
     }
 }

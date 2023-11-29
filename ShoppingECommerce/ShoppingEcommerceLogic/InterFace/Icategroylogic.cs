@@ -8,6 +8,6 @@ namespace ShoppingEcommerceLogic.InterFace
 {
     public interface Icategroylogic
     {
-        public Dictionary<int, string> categroylookup();
+        public List<Dictionary<string, object>> categroylookup();
     }
 }

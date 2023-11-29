@@ -72,6 +72,8 @@ namespace ShoppingECommerce
 
             app.UseAuthorization();
             app.UseAuthentication();
+            app.UseStaticFiles();
+            app.UseHttpsRedirection();
             app.UseCors(x => x
             .AllowAnyOrigin()
             .AllowAnyMethod()

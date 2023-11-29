@@ -10,6 +10,6 @@ namespace ShoppingEcommerceRepo.Interface
 {
     public interface Icategroyrepo
     {
-        public Dictionary<int, string> categroylookup();
+        public List<Dictionary<string, object>> categroylookup();
     }
 }

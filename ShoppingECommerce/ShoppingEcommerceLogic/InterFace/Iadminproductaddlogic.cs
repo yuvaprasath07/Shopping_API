@@ -9,6 +9,7 @@ namespace ShoppingEcommerceLogic.InterFace
 {
     public interface Iadminproductaddlogic
     {
-      Task<ResponseMessage?> AdminProductAdd(Addproductadmin addProductAdminModel);
+        Task<ResponseMessage?> AdminProductAdd(Addproductadmin addProductAdminModel);
+        public List<AddproductadminDB> productget();
     }
 }

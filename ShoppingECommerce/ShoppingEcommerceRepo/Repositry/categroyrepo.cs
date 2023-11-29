@@ -12,7 +12,7 @@ namespace ShoppingEcommerceRepo.Repositry
 {
     public class categroyrepo : Icategroyrepo
     {
-        public Dictionary<int, string> categroylookup()
+        public List<Dictionary<string, object>> categroylookup()
         {
             try
             {
@@ -26,15 +26,20 @@ namespace ShoppingEcommerceRepo.Repositry
 
                         using (var reader = command.ExecuteReader())
                         {
-                            Dictionary<int, string> data = new Dictionary<int, string>();
+                            List<Dictionary<string, object>> data = new List<Dictionary<string, object>>();
 
                             while (reader.Read())
                             {
                                 int categoryId = reader.GetInt32(reader.GetOrdinal("CategoryId"));
                                 string category = reader.GetString(reader.GetOrdinal("Category"));
 
-                                // Add to the dictionary
-                                data.Add(categoryId, category);
+                                var categoryData = new Dictionary<string, object>
+                                {
+                                    { "id", categoryId },
+                                    { "name", category }
+                                };
+
+                                data.Add(categoryData);
                             }
 
                             return data;
@@ -45,16 +50,15 @@ namespace ShoppingEcommerceRepo.Repositry
             catch (SqlException ex)
             {
                 Console.WriteLine($"SQL Error: {ex.Message}");
-                // Log or handle the SQL exception appropriately.
                 return null;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
-                // Handle other exceptions as needed.
                 return null;
             }
         }
+
 
     }
 

@@ -15,7 +15,7 @@ namespace ShoppingEcommerceLogic.Logic
         {
             _Categroyrepo = Categroyrepo;
         }
-        public Dictionary<int, string> categroylookup()
+        public List<Dictionary<string, object>> categroylookup()
         {
             var lookupdata = _Categroyrepo.categroylookup();
             return lookupdata;

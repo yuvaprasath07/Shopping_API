@@ -12,7 +12,7 @@ namespace ShoppingEcommerceRepo.Repositry
 {
     public class adminproductaddrepo : Iadminproductaddrepo
     {
-        public async Task<bool> adminproductadd(Addproductadmin AddproductadminModel)
+        public async Task<bool> adminproductadd(AddproductadminDB AddproductadminModel)
         {
             try
             {
@@ -52,5 +52,59 @@ namespace ShoppingEcommerceRepo.Repositry
             }
         }
 
+        public List<AddproductadminDB> productget()
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(Databasesetting.connectionstring))
+                {
+                    con.Open();
+
+                    using (SqlCommand command = new SqlCommand("shm.GetProductInfo", con))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<AddproductadminDB> data = new List<AddproductadminDB>();
+
+                            while (reader.Read())
+                            {
+                                int productId = reader.GetInt32(reader.GetOrdinal("productId"));
+                                int price = reader.GetInt32(reader.GetOrdinal("price"));
+                                string model = reader.GetString(reader.GetOrdinal("model"));
+                                string Description = reader.GetString(reader.GetOrdinal("Description"));
+                                int category = reader.GetInt32(reader.GetOrdinal("category"));
+                                string Imagefilepath = reader.GetString(reader.GetOrdinal("Imagefilepath"));
+
+                                AddproductadminDB addproductadmin = new AddproductadminDB
+                                {
+                                    Id = productId,
+                                    price = price,
+                                    model = model,
+                                    Description = Description,
+                                    category = category,
+                                    Imagefilepath = Imagefilepath
+                                };
+
+                                data.Add(addproductadmin);
+                            }
+
+                            return data;
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine($"SQL Error: {ex.Message}");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return null;
+            }
+        }
     }
 }

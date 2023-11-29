@@ -22,6 +22,11 @@ namespace ShoppingEcommerceLogic.Logic
         {
             try
             {
+                if (addProductAdminModel.Imagefilepath == null || addProductAdminModel.Imagefilepath.Length == 0)
+                {
+                    return ResponseMessage.New(ResponseCode.BadRequest, "Image file is required.");
+                }
+
                 string username = addProductAdminModel.model;
                 string userFolderPath = Path.Combine("wwwroot", "ProductImages");
 
@@ -30,28 +35,40 @@ namespace ShoppingEcommerceLogic.Logic
                     Directory.CreateDirectory(userFolderPath);
                 }
 
-                string uniqueFileName = $"{username}_{Guid.NewGuid()}{Path.GetExtension(addProductAdminModel.Imagefilepath)}";
+                string timestamp = DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss");
+                string uniqueFileName = $"{username}_{timestamp}{Path.GetExtension(addProductAdminModel.Imagefilepath.FileName)}";
 
                 string imagePath = Path.Combine(userFolderPath, uniqueFileName);
 
-                byte[] imageBytes = await File.ReadAllBytesAsync(addProductAdminModel.Imagefilepath);
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    await addProductAdminModel.Imagefilepath.CopyToAsync(stream);
+                }
 
-                await File.WriteAllBytesAsync(imagePath, imageBytes);
+                AddproductadminDB dbvalu = new AddproductadminDB()
+                {
+                    model = addProductAdminModel.model,
+                    category = addProductAdminModel.category,
+                    Description = addProductAdminModel.Description,
+                    price = addProductAdminModel.price,
+                    Imagefilepath = imagePath
+                };
 
-                addProductAdminModel.Imagefilepath = imagePath;
 
-                _iadminproductaddrepo.adminproductadd(addProductAdminModel);
+                _iadminproductaddrepo.adminproductadd(dbvalu);
 
-                return ResponseMessage.New(ResponseCode.OK, "Successfully Add");
+                return ResponseMessage.New(ResponseCode.OK, "Successfully added product.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error saving image: {ex.Message}");
-
                 return ResponseMessage.New(ResponseCode.BadRequest, ex.Message);
             }
         }
 
-       
+        public List<AddproductadminDB> productget()
+        {
+            var getproduct = _iadminproductaddrepo.productget();
+            return getproduct;
+        }
     }
 }

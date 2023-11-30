@@ -26,6 +26,8 @@ namespace ShoppingECommerce
             builder.Services.AddScoped<Iadminproductaddlogic, adminproductaddlogic>();
             builder.Services.AddScoped<Icategroyrepo, categroyrepo>();
             builder.Services.AddScoped<Icategroylogic, categroylogic>();
+            builder.Services.AddScoped<Iaddcartrepo, Addcartrepo>();
+            builder.Services.AddScoped<Iaddcartlogic, addcartlogic>();
 
             builder.Services.AddSwaggerGen(options =>
             {

@@ -17,17 +17,30 @@ namespace ShoppingEcommerceLogic.Logic
         {
             _addcartrepo = addcartrepo;
         }
+
+        public Task<List<cartGet>> cartget()
+        {
+            var data = _addcartrepo.cartget();
+            if(data != null)
+            {
+                return data;
+            }
+            return null;
+        }
+
         public async Task<ResponseMessage> productaddcart(Addcart addcart)
         {
             try
             {
-                await _addcartrepo.addpcart(addcart); 
-
-                return ResponseMessage.New(ResponseCode.OK, "Successfully added to the cart.");
+                var success = await _addcartrepo.addpcart(addcart);
+                if (success != false)
+                {
+                    return ResponseMessage.New(ResponseCode.OK, "Successfully added to the cart.");
+                }
+                return ResponseMessage.New(ResponseCode.BadRequest, "Failed to add to the cart.");
             }
             catch (Exception ex)
             {
-               
                 return ResponseMessage.New(ResponseCode.BadRequest, "Failed to add to the cart. " + ex.Message);
             }
         }

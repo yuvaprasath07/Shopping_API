@@ -10,5 +10,6 @@ namespace ShoppingEcommerceLogic.InterFace
     public interface Iaddcartlogic
     {
         Task<ResponseMessage?> productaddcart(Addcart addcart);
+        Task<List<cartGet>> cartget();
     }
 }

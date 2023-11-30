@@ -24,5 +24,24 @@ namespace ShoppingECommerce.Controllers
             var res = await _addcartlogic.productaddcart(addcart);
             return Ok(res);
         }
+
+        [HttpGet("GetCard")]
+        public async Task<IActionResult> GetCard()
+        {
+            var res = await _addcartlogic.cartget();
+            foreach (var product in res)
+            {
+                string imageFullPath = product.Imagefilepath.Replace("\\", "/");
+                string crtimagepath = imageFullPath.Substring(imageFullPath.IndexOf("wwwroot") + "wwwroot".Length);
+                string hostUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
+                string imageUrl = $"{hostUrl}/{crtimagepath}";
+                product.Imagefilepath = imageUrl;
+            }
+            if (res != null)
+            {
+                return Ok(res);
+            }
+            return BadRequest();
+        }
     }
 }

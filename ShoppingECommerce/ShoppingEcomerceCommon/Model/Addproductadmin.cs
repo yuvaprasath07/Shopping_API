@@ -21,7 +21,7 @@ namespace ShoppingEcomerceCommon.Model
     public class AddproductadminDB
     {
         [Key]
-        public int Id { get; set; }
+        public int productId { get; set; }
         public int price { get; set; }
         public string? model { get; set; }
         public string? Description { get; set; }

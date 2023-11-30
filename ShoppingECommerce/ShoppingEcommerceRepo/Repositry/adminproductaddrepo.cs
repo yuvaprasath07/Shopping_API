@@ -79,7 +79,7 @@ namespace ShoppingEcommerceRepo.Repositry
 
                                 AddproductadminDB addproductadmin = new AddproductadminDB
                                 {
-                                    Id = productId,
+                                    productId = productId,
                                     price = price,
                                     model = model,
                                     Description = Description,

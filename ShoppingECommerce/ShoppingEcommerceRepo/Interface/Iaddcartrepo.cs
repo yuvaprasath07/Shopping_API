@@ -10,5 +10,6 @@ namespace ShoppingEcommerceRepo.Interface
     public interface Iaddcartrepo
     {
         Task<bool> addpcart(Addcart addcart);
+        Task<List<cartGet>> cartget();
     }
 }

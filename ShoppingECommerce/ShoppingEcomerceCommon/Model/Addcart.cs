@@ -10,7 +10,6 @@ namespace ShoppingEcomerceCommon.Model
     public class Addcart
     {
         [Key]
-        public int cartid { get; set; }
         public int productcartid { get; set; }
         public int userid { get; set; }
 

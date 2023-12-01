@@ -11,5 +11,7 @@ namespace ShoppingEcommerceRepo.Interface
     {
         Task<bool> addpcart(Addcart addcart);
         Task<List<cartGet>> cartget();
+
+        public object Deletecart(int id);
     }
 }

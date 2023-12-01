@@ -11,6 +11,7 @@ namespace ShoppingEcomerceCommon.Model
     public class cartGet
     {
         [Key]
+        public int productId { get; set; }
         public int registerid { get; set; }
         public string? Name { get; set; }
         public int price { get; set; }

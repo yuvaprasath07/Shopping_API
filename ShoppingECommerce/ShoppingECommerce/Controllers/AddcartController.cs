@@ -43,5 +43,11 @@ namespace ShoppingECommerce.Controllers
             }
             return BadRequest();
         }
+
+        [HttpDelete("Deletecart")]
+        public IActionResult userDeleteeletecart(int id)
+        {
+            return Ok(_addcartlogic.deletecart(id));
+        }
     }
 }

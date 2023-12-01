@@ -67,6 +67,7 @@ namespace ShoppingEcommerceRepo.Repositry
 
                             while (reader.Read())
                             {
+                                int productId = reader.GetInt32(reader.GetOrdinal("productId"));
                                 int registerid = reader.GetInt32(reader.GetOrdinal("registerid"));
                                 string Name = reader.GetString(reader.GetOrdinal("Name"));
                                 int price = reader.GetInt32(reader.GetOrdinal("price"));
@@ -76,6 +77,7 @@ namespace ShoppingEcommerceRepo.Repositry
 
                                 cartGet addproductadmin = new cartGet
                                 {
+                                    productId=productId,
                                     registerid = registerid,
                                     Name = Name,
                                     price = price,
@@ -98,6 +100,30 @@ namespace ShoppingEcommerceRepo.Repositry
                 return null;
             }
             catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return null;
+            }
+        }
+
+        public object Deletecart(int id)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(Databasesetting.connectionstring))
+                {
+                    con.Open();
+                    using (SqlCommand command = new SqlCommand("dbo.DeleteShoppingData", con))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@Productcartid", id);
+                        command.ExecuteNonQueryAsync();
+                        return "Deleted Successfully";
+                    }
+                }
+
+            }
+            catch(Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
                 return null;

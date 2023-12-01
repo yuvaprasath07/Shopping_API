@@ -11,5 +11,6 @@ namespace ShoppingEcommerceLogic.InterFace
     {
         Task<ResponseMessage?> productaddcart(Addcart addcart);
         Task<List<cartGet>> cartget();
+        public object deletecart(int id);
     }
 }

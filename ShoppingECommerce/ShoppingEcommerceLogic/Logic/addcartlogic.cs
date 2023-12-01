@@ -28,6 +28,7 @@ namespace ShoppingEcommerceLogic.Logic
             return null;
         }
 
+
         public async Task<ResponseMessage> productaddcart(Addcart addcart)
         {
             try
@@ -45,6 +46,9 @@ namespace ShoppingEcommerceLogic.Logic
             }
         }
 
-
+        public object deletecart(int id)
+        {
+            return _addcartrepo.Deletecart(id);
+        }
     }
 }
